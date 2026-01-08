@@ -53,7 +53,7 @@ DATABASE_URL=postgresql://user:password@host:port/dbname
 ```
 ### 2. Local Development
 
-# Create and activate virtual environment
+``` # Create and activate virtual environment```
 
 ```python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -72,15 +72,49 @@ POST ```/chat```
 
 Purpose: Handles natural language queries about gold.
 
-Request: ```{"user_id": "U101", "message": "Why should I buy gold?"}```
+Request: ```{"user_id": "U101", 
+              "message": "Why should I buy gold?"}
+          ```
 
-Response: ```{"intent": "GOLD", "reply": "..."}```
+Response: ```{"intent": "GOLD", 
+              "reply": "..."}
+          ```
 
 🔹 Purchase Execution
 POST ```/purchase```
 
 Purpose: Executes a simulated gold buy order.
 
-Request: ```{"user_id": "U101", "amount": 5000}```
+Request: ```{"user_id": "U101",
+              "amount": 5000}
+         ```
 
-Response: ```{"status": "SUCCESS", "gold_grams": 0.82, ...}```
+Response: ```{"status": "SUCCESS", 
+              "gold_grams": 0.82, ...}
+              ```
+
+
+## 🗄️ Database Design
+
+### Purchase Table (Auto-Created)
+
+| Column      | Type        | Description                          |
+| ----------- | ----------- | ------------------------------------ |
+| **id**      | Integer (PK) | Primary key, auto-incremented        |
+| **user_id** | String       | Unique identifier for the user       |
+| **amount**  | Float        | Amount invested in currency          |
+| **gold_grams** | Float     | Calculated grams of gold purchased   |
+| **gold_price** | Float     | Price of gold at the time of purchase |
+| **created_at** | Timestamp | Record creation time (auto-generated) |
+
+
+## ☁️ Deployment Notes
+
+- 🚀 Uses **Render** / **Railway** for cloud deployment  
+- 🔌 Application listens on **PORT 8000**  
+- 🗄️ Uses managed database (**PostgreSQL recommended**)  
+
+### Procfile
+```procfile
+web: uvicorn app:app --host 0.0.0.0 --port $PORT
+```
