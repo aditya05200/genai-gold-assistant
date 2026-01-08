@@ -52,10 +52,10 @@ GOLDAPI_KEY=your_goldapi_key
 DATABASE_URL=postgresql://user:password@host:port/dbname
 ```
 ### 2. Local Development
-Bash
 
 # Create and activate virtual environment
-python -m venv venv
+
+```python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # Install dependencies
@@ -64,22 +64,23 @@ pip install -r requirements.txt
 # Start the server
 uvicorn app:app --reload
 The API will be available at http://127.0.0.1:8000.
+```
 
-🧪 API Documentation
+## 🧪 API Documentation
 🔹 Chat Assistant
-POST /chat
+POST ```/chat```
 
 Purpose: Handles natural language queries about gold.
 
-Request: {"user_id": "U101", "message": "Why should I buy gold?"}
+Request: ```{"user_id": "U101", "message": "Why should I buy gold?"}```
 
-Response: {"intent": "GOLD", "reply": "..."}
+Response: ```{"intent": "GOLD", "reply": "..."}```
 
 🔹 Purchase Execution
-POST /purchase
+POST ```/purchase```
 
 Purpose: Executes a simulated gold buy order.
 
-Request: {"user_id": "U101", "amount": 5000}
+Request: ```{"user_id": "U101", "amount": 5000}```
 
-Response: {"status": "SUCCESS", "gold_grams": 0.82, ...}
+Response: ```{"status": "SUCCESS", "gold_grams": 0.82, ...}```
